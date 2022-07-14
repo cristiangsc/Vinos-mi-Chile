@@ -5,7 +5,7 @@
       <h1><strong>VINOS MI CHILE</strong></h1>
       <v-spacer></v-spacer>
       <v-badge :content="cartCount" class="ma-3 mt-6" :value="cartCount>0">
-        <v-icon>mdi-cart</v-icon>
+        <v-icon @click="redirectTo('pagar')" :disabled="currentRoute === 'pagar'">mdi-cart</v-icon>
       </v-badge>
     </v-app-bar>
 

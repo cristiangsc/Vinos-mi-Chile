@@ -54,10 +54,10 @@
         <div class="mt-2">
           <v-row>
             <v-list-item>
-              Sub Total: <span>${{ Number(cartTotal).toLocaleString('es-CL') }}</span>
+              Sub Total: <span>$ {{ Number(cartTotal).toLocaleString('es-CL') }}</span>
             </v-list-item>
             <v-list-item>
-              Descuento:<span class="red--text">${{ Number(cartTotalDescuento).toLocaleString('es-CL') }}</span>
+              Descuento:<span class="red--text"> $ {{ Number(cartTotalDescuento).toLocaleString('es-CL') }}</span>
             </v-list-item>
             <v-list-item>
               Total:<span class="font-weight-black"  >$ {{ Math.round(Number(cartTotal) - Number(cartTotalDescuento)).toLocaleString('es-CL') }}</span>

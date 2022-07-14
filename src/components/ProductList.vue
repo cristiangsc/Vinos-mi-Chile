@@ -6,16 +6,17 @@
       <v-col sm="12" md="4">
         <card :showButton="true" />
       </v-col>
-      <v-col class="pa-5" md="3" sm="12" v-for="product in products" :key="product.id">
+      <v-col class="pa-5" md="3" sm="12" v-for="product in paginatedData" :key="product.id">
         <product-item :product="product" />
       </v-col>
     </v-row>
+    <v-pagination v-show="products.length" v-model="page" :length="pages"></v-pagination>
   </v-container>
 </template>
 
 <script>
 
-import {mapActions, mapMutations, mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 import ProductItem from "@/components/ProductItem";
 import Card from "@/views/Card";
 
@@ -25,6 +26,12 @@ export default {
     ProductItem,
     Card
   },
+  data(){
+    return {
+      rowsPerPage: 5,
+      page: 1
+    }
+  },
   mounted() {
     this.fetchProducts()
   },
@@ -32,7 +39,13 @@ export default {
     ...mapActions('products', ['fetchProducts']),
   },
   computed: {
-    ...mapState('products', ['products'])
+    ...mapState('products', ['products']),
+    pages() {
+      return this.rowsPerPage ? Math.ceil(this.products.length / this.rowsPerPage) : 0
+    },
+    paginatedData() {
+      return this.products.slice((this.page * this.rowsPerPage) - this.rowsPerPage, (this.page * this.rowsPerPage));
+    }
   },
 }
 </script>

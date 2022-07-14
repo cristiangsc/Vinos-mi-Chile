@@ -6,10 +6,11 @@
         <v-col sm="12" md="4">
           <card :showButton="true" />
         </v-col>
-        <v-col class="pa-5" md="3" sm="12" v-for="promocion in promociones" :key="promocion.id">
+        <v-col class="pa-5" md="3" sm="12" v-for="promocion in paginatedData" :key="promocion.id">
           <promociones-item :promocion="promocion" />
         </v-col>
       </v-row>
+        <v-pagination v-show="promociones.length" v-model="page" :length="pages"></v-pagination>
     </v-container>
 </template>
 
@@ -25,6 +26,12 @@ export default {
     PromocionesItem,
     Card
   },
+  data() {
+    return {
+      rowsPerPage: 5,
+      page: 1,
+    }
+  },
   mounted() {
     this.fetchPromociones()
   },
@@ -32,7 +39,13 @@ export default {
     ...mapActions('promociones', ['fetchPromociones']),
   },
   computed: {
-    ...mapState('promociones', ['promociones'])
+    ...mapState('promociones', ['promociones']),
+    pages() {
+      return this.rowsPerPage ? Math.ceil(this.promociones.length / this.rowsPerPage) : 0
+    },
+    paginatedData() {
+      return this.promociones.slice((this.page * this.rowsPerPage) - this.rowsPerPage, (this.page * this.rowsPerPage));
+    }
   },
 }
 </script>
