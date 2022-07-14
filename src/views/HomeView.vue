@@ -1,18 +1,60 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+  <v-carousel
+      cycle
+      height="400"
+      hide-delimiter-background
+      show-arrows-on-hover
+  >
+    <v-carousel-item
+        v-for="(slide, i) in slides"
+        :key="i"
+        height="100%"
+        :src="slide.imagen"
+    >
+      <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+      >
+        <div class="text-h2">
+          {{ slide.titulo }} Slide
+        </div>
+      </v-row>
+    </v-carousel-item>
+  </v-carousel>
+  <vinos-home-list/>
+</div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+
+import VinosHomeList from "@/components/VinosHomeList";
 
 export default {
-  name: 'HomeView',
+  name: 'Home',
   components: {
-    HelloWorld
-  }
+    VinosHomeList
+  },
+  data() {
+    return {
+      slides: [],
+    }
+  },
+  created() {
+    this.fetchBanner()
+  },
+  methods: {
+    async fetchBanner() {
+      try {
+        const data = await fetch('/fixtures/home.json')
+        if (!data.ok) throw ("Error en conexión")
+        const home = await data.json()
+        this.slides = home.mejoresvinos
+        } catch (error) {
+        console.log("error" + error)
+      }
+    }
+  },
 }
 </script>
