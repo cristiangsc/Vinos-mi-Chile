@@ -3,10 +3,10 @@
     <h1 class="text-center my-4">Vinos Mi Chile ACCESORIOS</h1>
     <v-divider></v-divider>
     <v-row justify="center">
-      <v-col sm="12" md="4">
+      <v-col sm="12" md="8"  xl="5">
         <card :showButton="true" />
       </v-col>
-      <v-col class="pa-5" md="3" sm="12" v-for="accesorio in paginatedData" :key="accesorio.id">
+      <v-col class="pa-5" md="4" sm="12" v-for="accesorio in paginatedData" :key="accesorio.id">
         <accesorios-item :accesorio="accesorio" />
       </v-col>
     </v-row>

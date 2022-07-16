@@ -3,7 +3,7 @@
   <v-container>
 
     <v-row class="d-flex justify-lg-space-around">
-      <v-col cols="6" sm="12" lg="6">
+      <v-col cols="12" sm="12" lg="6" md="6">
         <v-card elevation="2" class="my-5 py-5 pa-10 ps-10">
           <div class="font-weight-bold ml-8 mb-2 text-center text-h4">
             DATOS DEL COMPRADOR
@@ -38,7 +38,7 @@
         </v-form>
         </v-card>
       </v-col>
-      <v-col cols="5" sm="12" lg="5">
+      <v-col  cols="12" sm="12" lg="6" md="6">
         <card :showButton="false" />
       </v-col>
     </v-row>
