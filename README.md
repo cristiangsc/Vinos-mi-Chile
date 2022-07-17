@@ -1,4 +1,4 @@
-# prueba de Certificación Talento Digital FrontEnd
+# Prueba de Certificación Talento Digital FrontEnd
 
 ## Project setup
 ```
