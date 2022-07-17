@@ -1,9 +1,9 @@
 <template>
   <v-card class="mx-auto my-12" max-width="374">
 
-    <v-img height="250" :src="product.imagen"></v-img>
+    <v-img height="250" width="250" class="mx-auto" :src="product.imagen"></v-img>
 
-    <v-card-title>{{ product.nombre }}</v-card-title>
+    <v-card-title class="justify-center">{{ product.nombre }}</v-card-title>
     <v-card-text>
       {{ product.descripcion }}
     </v-card-text>

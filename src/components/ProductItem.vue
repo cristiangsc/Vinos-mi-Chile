@@ -1,9 +1,9 @@
 <template>
-  <v-card class="mx-auto my-12" max-width="374">
+  <v-card class="mx-auto my-5" max-width="374">
 
-    <v-img height="250" :src="product.imagen"></v-img>
+    <v-img height="250" width="250" class="mx-auto" :src="product.imagen"></v-img>
 
-    <v-card-title>{{ product.nombre }}</v-card-title>
+    <v-card-title class="justify-center">{{ product.nombre }}</v-card-title>
     <v-card-text>
       {{ product.descripcion }}
     </v-card-text>
@@ -21,8 +21,8 @@
 
     <v-divider class="mx-4"></v-divider>
         <v-card-text>
-          <div class="my-4 text-subtitle-1">Antes: ${{ product.precio_normal }}</div>
-          <div class="my-4 text-subtitle-1">Ahora ${{ product.precio_promo }}</div>
+          <div class="my-4 text-subtitle-1">Antes: ${{ Number(product.precio_normal).toLocaleString('es-CL') }}</div>
+          <div class="my-4 text-subtitle-1 red--text font-weight-bold">Ahora ${{ Number(product.precio_promo).toLocaleString('es-CL') }}</div>
         </v-card-text>
     <v-spacer></v-spacer>
 

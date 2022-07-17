@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center">Nuestros Mejores Vinos</h1>
+    <h1 class="text-center mt-5">Nuestros Mejores Vinos</h1>
     <v-container>
       <v-divider></v-divider>
       <v-row justify="center">

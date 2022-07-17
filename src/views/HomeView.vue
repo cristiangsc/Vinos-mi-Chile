@@ -2,25 +2,29 @@
 <div>
   <v-carousel
       cycle
-      height="400"
+      height="450"
       hide-delimiter-background
       show-arrows-on-hover
   >
     <v-carousel-item
         v-for="(slide, i) in slides"
         :key="i"
-        height="100%"
-        :src="slide.imagen"
+        height="450px"
+        width="500px"
+        class="mx-auto"
+       :src="slide.imagen"
     >
+     
       <v-row
           class="fill-height"
           align="center"
           justify="center"
       >
-        <div class="text-h2">
-          {{ slide.titulo }} Slide
+        <div class="text-h4">
+          {{ slide.titulo }}
         </div>
       </v-row>
+     
     </v-carousel-item>
   </v-carousel>
   <vinos-home-list/>

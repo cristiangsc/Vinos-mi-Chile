@@ -11,9 +11,24 @@
             v-else
             :headers="headers"
             :items="cartProducts"
-            sort-by="title"
+            sort-by="product"
             class="elevation-1"
         >
+
+          <template
+              v-for="header in headers.filter((header) =>
+                header.hasOwnProperty('formatter'))"
+              v-slot:[`item.${header.value}`]="{ header, value }"
+            >
+              {{ header.formatter(value) }}
+            </template>
+
+        <template v-slot:item.imagen="{ item }">
+            <div class="p-2">
+              <v-img :src="item.imagen" :alt="item.imagen" height="50px" width="50px"></v-img>
+            </div>
+          </template>
+
           <template v-slot:top>
             <v-toolbar flat>
 
@@ -57,7 +72,7 @@
               Sub Total: <span>$ {{ Number(cartTotal).toLocaleString('es-CL') }}</span>
             </v-list-item>
             <v-list-item>
-              Descuento:<span class="red--text"> $ {{ Number(cartTotalDescuento).toLocaleString('es-CL') }}</span>
+              Descuento ({{cartDescuento}}):<span class="red--text"> $ {{ Number(cartTotalDescuento).toLocaleString('es-CL') }} </span>
             </v-list-item>
             <v-list-item>
               Total:<span class="font-weight-black"  >$ {{ Math.round(Number(cartTotal) - Number(cartTotalDescuento)).toLocaleString('es-CL') }}</span>
@@ -92,30 +107,33 @@ export default {
     return {
       dialogDelete: false,
       headers: [
-
         {
-          text: 'ID:Producto',
-          align: 'start',
-          sortable: false,
-          value: 'id',
+          text:'Imagen',
+          align: 'center',
+          value: 'imagen',
+          sortable: false
+
         },
         {text: 'Producto', value: 'product'},
         {text: 'Cantidad', value: 'count'},
-        {text: 'Precio', value: 'price'},
-        {text: 'SubTotal', value: 'total'},
+        {text: 'Precio', value: "price", align:'right', formatter: this.formatCurrency},
+        {text: 'SubTotal', value: 'total', align:'right', formatter: this.formatCurrency},
         {text: 'Acciones', value: 'actions', sortable: false},
       ],
       deleteId: null,
     }
   },
   computed: {
-    ...mapGetters('cart', ['cartProducts', 'cartTotal', 'cartTotalDescuento']),
+    ...mapGetters('cart', ['cartProducts', 'cartTotal', 'cartTotalDescuento','cartDescuento']),
     counter() {
       return this.cartProducts.length
     },
   },
   methods: {
     ...mapActions('cart', ['addStockCartProduct', 'removeCartProduct', 'removeStockCartProduct']),
+    formatCurrency (value) {
+    return value.toLocaleString('es-CL')
+   },
     addStock(item) {
       console.log(item)
       this.addStockCartProduct(item.id)
